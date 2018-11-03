@@ -1,0 +1,21 @@
+
+POST: http://localhost:8080/LivrariaVirtual/servicos/Usuario
+
+{
+	
+	"nome" : "adm",
+	
+	"email" : "adm@gmail.com",
+	
+	"senha" : "123456",
+
+	"documento": "45544654",
+
+	"dataNascimento": "1998/04/05",
+	
+	"isADM" : true
+
+
+}
+
+GET: http://localhost:8080/LivrariaVirtual/servicos/Usuario?email=adm@gmail.com&senha=123456
