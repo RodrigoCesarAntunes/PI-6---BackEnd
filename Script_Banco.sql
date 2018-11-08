@@ -1,6 +1,10 @@
 create database livraria_virtual;
 use livraria_virtual;
 
+CREATE USER 'rodrigo'@'localhost' IDENTIFIED BY 'Livraria-435';
+GRANT ALL PRIVILEGES ON * . * TO 'rodrigo'@'localhost';
+FLUSH PRIVILEGES;
+
 create table usuario
 (
 	id  int primary key auto_increment,
