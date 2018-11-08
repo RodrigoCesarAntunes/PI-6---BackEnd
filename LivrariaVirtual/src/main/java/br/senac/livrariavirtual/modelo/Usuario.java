@@ -64,7 +64,7 @@ public class Usuario extends DbContext {
 		this.dataNascimento = dataNascimento;
 	}
 	
-	// Ações
+	// Aï¿½ï¿½es
 	
 	@Override
 	public void Inserir() throws SQLException {
@@ -75,12 +75,16 @@ public class Usuario extends DbContext {
 	}
 	@Override
 	public void Alterar() throws SQLException{
-		// TODO Auto-generated method stub
+		String query = String.format("update usuario set nome = %s, email = '%s', "
+				+ "senha = '%s', documento = '%s', data_nascimento = '%s', isAdm = '%s' "
+				+ "where email = '%s';", nome, email, senha, documento, dataNascimento, isADM);
 		
+		System.out.println(query);
+		statement.executeUpdate(query);
 	}
 	@Override
 	public Usuario Selecionar() throws SQLException{
-		String query = String.format("SELECT * FROM usuario WHERE email = '%s'", email);
+		String query = String.format("SELECT * FROM usuario WHERE email = '%s' AND isExcluido < 1;", email);
 		resultSet = statement.executeQuery(query);
 		String _senha = "";
 		while (resultSet.next())
@@ -102,11 +106,9 @@ public class Usuario extends DbContext {
 	@Override
 	public void Deletar() throws SQLException{
 		// TODO Auto-generated method stub
-		
+		String query = String.format("update usuario set isExcluido = %s, email = '%d', ", 1);
+		System.out.println(query);
+		statement.executeUpdate(query);
 	}
 
-	
-	
-	
-	
 }

@@ -1,7 +1,7 @@
 
 POST: http://localhost:8080/LivrariaVirtual/servicos/Usuario
 
-{
+	{
 	
 	"nome" : "adm",
 	

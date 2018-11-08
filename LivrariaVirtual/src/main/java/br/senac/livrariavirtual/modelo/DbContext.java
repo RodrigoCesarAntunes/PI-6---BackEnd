@@ -11,7 +11,7 @@ import java.sql.Statement;
 
 public abstract class DbContext {
 	
-	public static String status = "Não conectou...";
+	public static String status = "Nï¿½o conectou...";
 	protected Statement statement;
 	protected ResultSet resultSet;
 	
@@ -26,7 +26,7 @@ public abstract class DbContext {
 	 
 	        try {
 	 
-	        	// Carregando o JDBC Driver padrão
+	        	// Carregando o JDBC Driver padrï¿½o
 	        	String driverName = "com.mysql.cj.jdbc.Driver";                        
 	        
 	        	Class.forName(driverName);
@@ -35,25 +35,25 @@ public abstract class DbContext {
 	            String dbURL = "jdbc:mysql://localhost:3306/livraria_virtual?useTimezone=true&serverTimezone=UTC";
 	            
 	            Properties properties = new Properties();
-	            properties.put("user", "root");
-	            properties.put("password", "VetDB-435");
+	            properties.put("user", "rodrigo");
+	            properties.put("password", "Livraria-435");
 	            
 	            connection = DriverManager.getConnection(dbURL, properties);
 	            
-	            //Testa sua conexão//  
+	            //Testa sua conexï¿½o//  
 	 
 	            if (connection != null) {
 	                status = ("STATUS--->Conectado com sucesso!");
 	            } else {
 	 
-	                status = ("STATUS--->Não foi possivel realizar conexão");
+	                status = ("STATUS--->Nï¿½o foi possivel realizar conexï¿½o");
 	 
 	            }
 	 
 	            return connection;
 	 
 	        }
-	        catch (ClassNotFoundException e) {  //Driver não encontrado
+	        catch (ClassNotFoundException e) {  //Driver nï¿½o encontrado
 	       	 
 	            System.out.println("O driver expecificado nao foi encontrado.");
 	 
@@ -63,7 +63,7 @@ public abstract class DbContext {
 	        
 	        catch (SQLException e) {
 	 
-	//Não conseguindo se conectar ao banco
+	//Nï¿½o conseguindo se conectar ao banco
 	        	System.out.println("Nao foi possivel conectar ao Banco de Dados.");
 	        	e.printStackTrace();
 	            return null;
@@ -74,7 +74,7 @@ public abstract class DbContext {
 	 
 	    }
 
-	// Método que retorna o status da sua conexão//
+	// Mï¿½todo que retorna o status da sua conexï¿½o//
 
 	public static String statusConection() {
 
@@ -82,7 +82,7 @@ public abstract class DbContext {
 
 	}
 
-	// Método que fecha sua conexão//
+	// Mï¿½todo que fecha sua conexï¿½o//
 
 	public static boolean FecharConexao() {
 
@@ -100,7 +100,7 @@ public abstract class DbContext {
 
 	}
 
-	// Método que reinicia sua conexão//
+	// Mï¿½todo que reinicia sua conexï¿½o//
 
 	public static java.sql.Connection ReiniciarConexao() {
 
