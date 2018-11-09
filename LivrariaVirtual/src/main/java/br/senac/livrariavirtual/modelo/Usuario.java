@@ -75,9 +75,9 @@ public class Usuario extends DbContext {
 	}
 	@Override
 	public void Alterar() throws SQLException{
-		String query = String.format("update usuario set nome = %s, email = '%s', "
+		String query = String.format("update usuario set nome = '%s', email = '%s', "
 				+ "senha = '%s', documento = '%s', data_nascimento = '%s', isAdm = '%s' "
-				+ "where email = '%s';", nome, email, senha, documento, dataNascimento, isADM);
+				+ "where email = '%s';", nome, email, senha, documento, dataNascimento, isADM, email);
 		
 		System.out.println(query);
 		statement.executeUpdate(query);
