@@ -72,7 +72,7 @@ private Connection conexao;
 	@Override
 	public void Inserir() throws SQLException {
 		iniciarConexao();
-		String query = String.format("INSERT INTO Livro (nome, editora, edicao, preco, genero, autor) "
+		String query = String.format("INSERT INTO livro (nome, editora, edicao, preco, tipo, autor) "
 				+ "VALUES ('%s', '%s', '%s', '%s', '%s', '%s')" ,nome ,editora, edicao, preco, genero, autor);
 		System.out.println(query);
 		statement.executeUpdate(query);
@@ -82,7 +82,7 @@ private Connection conexao;
 	public void Alterar() throws SQLException {
 		// TODO Auto-generated method stub
 		iniciarConexao();
-		String query = String.format("update usuario set nome = '%s', editora = '%s', "
+		String query = String.format("update livro set nome = '%s', editora = '%s', "
 				+ "edicao = '%s', preco = '%s', genero = '%s', autor = '%s' "
 				+ "where id = '%s';", nome, editora, edicao, preco, genero, autor, id);
 		
@@ -98,16 +98,17 @@ private Connection conexao;
 	@Override
 	public List<DbContext> SelecionarTudo() throws SQLException {
 		iniciarConexao();
-		String query = String.format("SELECT * FROM livro WHERE titulo like '%%s%' AND isExcluido < 1;", nome);
+		String query = String.format("SELECT * FROM livro WHERE nome like '%%%s%%' AND isExcluido < 1;", nome);
+		System.out.print(query);
 		resultSet = statement.executeQuery(query);
 		List<DbContext> livros = new ArrayList<DbContext>();
 		while (resultSet.next())
 		{
-			id = resultSet.getInt(id);
+			id = resultSet.getInt("id");
 			nome = resultSet.getString("nome");
 			editora = resultSet.getString("editora");
 			edicao = resultSet.getInt("edicao");
-			preco = resultSet.getDouble("isADM");
+			preco = resultSet.getDouble("preco");
 			genero = resultSet.getString("tipo");
 			autor = resultSet.getString("autor");
 			livros.add(this);

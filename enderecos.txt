@@ -19,3 +19,20 @@ POST: http://localhost:8080/LivrariaVirtual/servicos/Usuario
 }
 
 GET: http://localhost:8080/LivrariaVirtual/servicos/Usuario?email=adm@gmail.com&senha=123456
+
+POST Livro:
+
+{
+	"preco": 25.5,
+	"nome" : "Red Queen",
+	"editora": "Abril",
+	"edicao": 1,
+	"genero": "Drama",
+	"autor" : "Victoria Aveyard"
+}
+
+get todos os livro:
+http://localhost:8080/LivrariaVirtual/servicos/Livro?nome=
+
+get livros por nome: 
+http://localhost:8080/LivrariaVirtual/servicos/Livro?nome=Red Queen

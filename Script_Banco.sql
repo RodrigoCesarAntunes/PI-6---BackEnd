@@ -17,13 +17,16 @@ create table usuario
     isExcluido int(1) default 0
 );
 
-create table livros
+create table livro
 (
 	id  int primary key auto_increment,
     	nome varchar(255),
     	autor varchar(255),
     	tipo varchar(255),
-	preco decimal(6,2)
+	preco decimal(6,2),
+	editora varchar(255),
+	edicao int,
+	isExcluido int(1) default 0
 );
 
 create table usuario_livros
