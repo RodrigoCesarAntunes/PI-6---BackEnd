@@ -87,4 +87,12 @@ public class UsuarioServico {
 		}
 		
 	}
+	
+	@PUT
+	@Path("/delete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public boolean deleteCliente(Usuario usuario)
+	{
+		return false;
+	}
 }

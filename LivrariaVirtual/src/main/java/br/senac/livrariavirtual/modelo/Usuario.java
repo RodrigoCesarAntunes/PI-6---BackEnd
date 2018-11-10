@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 public class Usuario extends DbContext {
 	
+	private int id;
 	private String nome;
 	private String email;
 	private String senha;
@@ -16,6 +17,12 @@ public class Usuario extends DbContext {
 	
 	public Usuario() throws SQLException
 	{
+
+	}
+	
+	private void iniciarConexao()throws SQLException
+	{
+
 		conexao = getConexaoMySQL();
 		statement = conexao.createStatement();
 	}
@@ -63,11 +70,20 @@ public class Usuario extends DbContext {
 	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	// A��es
 	
 	@Override
 	public void Inserir() throws SQLException {
+		iniciarConexao();
 		String query = String.format("INSERT INTO usuario (nome, email, senha, documento, data_nascimento, isADM) "
 				+ "VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",nome, email, senha, documento, dataNascimento, isADM);
 		System.out.println(query);
@@ -75,16 +91,18 @@ public class Usuario extends DbContext {
 	}
 	@Override
 	public void Alterar() throws SQLException{
+		iniciarConexao();
 		String query = String.format("update usuario set nome = '%s', email = '%s', "
 				+ "senha = '%s', documento = '%s', data_nascimento = '%s', isAdm = '%s' "
-				+ "where email = '%s';", nome, email, senha, documento, dataNascimento, isADM, email);
+				+ "where id = '%s';", nome, email, senha, documento, dataNascimento, isADM, id);
 		
 		System.out.println(query);
 		statement.executeUpdate(query);
 	}
 	@Override
 	public Usuario Selecionar() throws SQLException{
-		String query = String.format("SELECT * FROM usuario WHERE email = '%s' AND isExcluido < 1;", email);
+		iniciarConexao();
+		String query = String.format("SELECT * FROM usuario WHERE id = '%s' AND isExcluido < 1;", id);
 		resultSet = statement.executeQuery(query);
 		String _senha = "";
 		while (resultSet.next())
@@ -106,9 +124,11 @@ public class Usuario extends DbContext {
 	@Override
 	public void Deletar() throws SQLException{
 		// TODO Auto-generated method stub
+		iniciarConexao();
 		String query = String.format("update usuario set isExcluido = %s, email = '%d', ", 1);
 		System.out.println(query);
 		statement.executeUpdate(query);
 	}
+
 
 }

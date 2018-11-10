@@ -11,7 +11,7 @@ import java.sql.Statement;
 
 public abstract class DbContext {
 	
-	public static String status = "N�o conectou...";
+	public static String status = "Não conectou...";
 	protected Statement statement;
 	protected ResultSet resultSet;
 	

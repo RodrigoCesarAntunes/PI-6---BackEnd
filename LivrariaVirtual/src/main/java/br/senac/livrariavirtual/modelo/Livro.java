@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class Livro extends DbContext {
 	
-	private int preco;
+	private double preco;
 	private String nome;
 	private String	editora;
 	private int edicao;
@@ -22,11 +22,11 @@ private Connection conexao;
 	}
 	
 	
-	public int getPreço() {
-		return preço;
+	public double getPreço() {
+		return preco;
 	}
-	public void setPreço(int preço) {
-		this.preço = preço;
+	public void setPreço(double preco) {
+		this.preco = preco;
 	}
 	public String getNome() {
 		return nome;
@@ -67,8 +67,8 @@ private Connection conexao;
 	
 	@Override
 	public void Inserir() throws SQLException {
-		String query = String.format("INSERT INTO Livro (id, nome, editora, edicao, preco, genero, autor) "
-				+ "VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",id ,nome ,editora, edicao, preco, genero, autor);
+		String query = String.format("INSERT INTO Livro (nome, editora, edicao, preco, genero, autor) "
+				+ "VALUES ('%s', '%s', '%s', '%s', '%s', '%s')" ,nome ,editora, edicao, preco, genero, autor);
 		System.out.println(query);
 		statement.executeUpdate(query);
 	}
