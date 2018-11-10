@@ -25,6 +25,7 @@ public class UsuarioServico {
 			Usuario usuario = new Usuario();
 			usuario.setEmail(email);
 			usuario.setSenha(senha);
+			
 			usuario = usuario.Selecionar();
 			
 			return usuario;

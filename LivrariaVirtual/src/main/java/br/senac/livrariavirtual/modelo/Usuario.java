@@ -102,7 +102,7 @@ public class Usuario extends DbContext {
 	@Override
 	public Usuario Selecionar() throws SQLException{
 		iniciarConexao();
-		String query = String.format("SELECT * FROM usuario WHERE id = '%s' AND isExcluido < 1;", id);
+		String query = String.format("SELECT * FROM usuario WHERE email = '%s' AND isExcluido < 1;", email);
 		resultSet = statement.executeQuery(query);
 		String _senha = "";
 		while (resultSet.next())
@@ -125,7 +125,7 @@ public class Usuario extends DbContext {
 	public void Deletar() throws SQLException{
 		// TODO Auto-generated method stub
 		iniciarConexao();
-		String query = String.format("update usuario set isExcluido = %s, email = '%d', ", 1);
+		String query = String.format("update usuario set isExcluido = %d, email = '%s', ", 1, email);
 		System.out.println(query);
 		statement.executeUpdate(query);
 	}
