@@ -44,6 +44,30 @@ public class LivroServico {
 		
 	}
 	
+	@GET
+	@Path("/id")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Livro getLivro(@QueryParam("id")int id)
+	{
+		
+		try
+		{
+			Livro livro = new Livro();
+			livro.setId(id);
+			return livro.Selecionar();
+		}
+		catch(SQLException ex)
+		{
+			System.out.println(ex.getMessage());
+			return null;
+		}
+		catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+			return null;
+		}	
+	}
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Boolean postLivro(Livro livro)

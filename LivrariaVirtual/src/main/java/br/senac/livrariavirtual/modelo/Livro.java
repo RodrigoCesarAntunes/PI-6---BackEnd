@@ -92,7 +92,24 @@ private Connection conexao;
 
 	@Override
 	public Livro Selecionar() throws SQLException {
-		return null;
+		iniciarConexao();
+		String query = String.format("SELECT * FROM livro WHERE id = %d AND isExcluido < 1;", id);
+		System.out.print(query);
+		resultSet = statement.executeQuery(query);
+		
+		while (resultSet.next())
+		{	
+			id = resultSet.getInt("id"); 
+			nome = resultSet.getString("nome");
+			editora = resultSet.getString("editora"); 
+			edicao = resultSet.getInt("edicao");
+			preco = resultSet.getDouble("preco");
+			genero = resultSet.getString("tipo"); 
+			autor = resultSet.getString("autor");
+		}
+		
+		return this;
+		
 	}
 
 	@Override
