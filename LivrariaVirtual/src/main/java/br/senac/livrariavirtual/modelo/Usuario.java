@@ -2,6 +2,7 @@ package br.senac.livrariavirtual.modelo;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Usuario extends DbContext {
 	
@@ -22,7 +23,6 @@ public class Usuario extends DbContext {
 	
 	private void iniciarConexao()throws SQLException
 	{
-
 		conexao = getConexaoMySQL();
 		statement = conexao.createStatement();
 	}
@@ -99,6 +99,13 @@ public class Usuario extends DbContext {
 		System.out.println(query);
 		statement.executeUpdate(query);
 	}
+
+	@Override
+	public List<DbContext> SelecionarTudo() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public Usuario Selecionar() throws SQLException{
 		iniciarConexao();
@@ -125,10 +132,11 @@ public class Usuario extends DbContext {
 	public void Deletar() throws SQLException{
 		// TODO Auto-generated method stub
 		iniciarConexao();
-		String query = String.format("update usuario set isExcluido = %d, email = '%s', ", 1, email);
+		String query = String.format("update usuario set isExcluido = %d, where email = '%s', ", 1, email);
 		System.out.println(query);
 		statement.executeUpdate(query);
 	}
+
 
 
 }

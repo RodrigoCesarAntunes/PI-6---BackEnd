@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 
 import java.sql.Statement;
@@ -116,6 +117,8 @@ public abstract class DbContext {
 	public abstract void Alterar() throws SQLException;
 	
 	public abstract DbContext Selecionar() throws SQLException;
+	
+	public abstract List<DbContext> SelecionarTudo() throws SQLException;
 	
 	public abstract void Deletar() throws SQLException;
 }
