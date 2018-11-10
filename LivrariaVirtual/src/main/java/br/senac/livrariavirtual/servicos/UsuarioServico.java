@@ -48,10 +48,8 @@ public class UsuarioServico {
 	public Boolean postCliente(Usuario usuario)
 	{
 		try
-		{
-			Usuario user = new Usuario();
-			user = usuario; 
-			user.Inserir();	
+		{ 
+			usuario.Inserir();	
 			return true;
 		}
 		catch(SQLException ex)
@@ -72,8 +70,8 @@ public class UsuarioServico {
 	{
 		try 
 		{
-			Usuario user = usuario;
-			user.Alterar();
+			usuario.Alterar();
+			
 			return true;
 		}
 		catch(SQLException e)
@@ -94,6 +92,21 @@ public class UsuarioServico {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public boolean deleteCliente(Usuario usuario)
 	{
-		return false;
+		try 
+		{
+			usuario.Deletar();
+			return true;
+		}
+		catch(SQLException e)
+		{
+			System.out.println(e.getMessage());
+			return false;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+			return false;
+		}
+		
 	}
 }
