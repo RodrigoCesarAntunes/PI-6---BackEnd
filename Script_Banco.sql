@@ -35,6 +35,6 @@ create table usuario_livros
     livro_id int,
     usuario_email varchar(255),
     
-    foreign key (livro_id) references livros(id),
+    foreign key (livro_id) references livro(id),
     foreign key (usuario_email) references usuario(email)
 )

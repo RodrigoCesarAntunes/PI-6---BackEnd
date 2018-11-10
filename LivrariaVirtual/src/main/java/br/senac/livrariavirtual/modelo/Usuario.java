@@ -10,7 +10,7 @@ public class Usuario extends DbContext {
 	private String nome;
 	private String email;
 	private String senha;
-	private String documento;
+	private String numeroDocumento;
 	private String dataNascimento;
 	private Boolean isADM;
 	
@@ -55,12 +55,12 @@ public class Usuario extends DbContext {
 		this.isADM = isADM;
 	}
 	
-	public String getDocumento() {
-		return documento;
+	public String getNumeroDocumento() {
+		return numeroDocumento;
 	}
 
-	public void setDocumento(String documento) {
-		this.documento = documento;
+	public void setNumeroDocumento(String documento) {
+		this.numeroDocumento = documento;
 	}
 
 	public String getDataNascimento() {
@@ -85,7 +85,7 @@ public class Usuario extends DbContext {
 	public void Inserir() throws SQLException {
 		iniciarConexao();
 		String query = String.format("INSERT INTO usuario (nome, email, senha, documento, data_nascimento, isADM) "
-				+ "VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",nome, email, senha, documento, dataNascimento, isADM);
+				+ "VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",nome, email, senha, numeroDocumento, dataNascimento, isADM);
 		System.out.println(query);
 		statement.executeUpdate(query);
 	}
@@ -94,7 +94,7 @@ public class Usuario extends DbContext {
 		iniciarConexao();
 		String query = String.format("update usuario set nome = '%s', email = '%s', "
 				+ "senha = '%s', documento = '%s', data_nascimento = '%s', isAdm = '%s' "
-				+ "where id = '%s';", nome, email, senha, documento, dataNascimento, isADM, id);
+				+ "where id = '%s';", nome, email, senha, numeroDocumento, dataNascimento, isADM, id);
 		
 		System.out.println(query);
 		statement.executeUpdate(query);
@@ -116,7 +116,7 @@ public class Usuario extends DbContext {
 		{
 			_senha = resultSet.getString("senha");
 			nome = resultSet.getString("nome");
-			documento = resultSet.getString("documento");
+			numeroDocumento = resultSet.getString("documento");
 			dataNascimento = resultSet.getString("data_nascimento");
 			isADM = resultSet.getBoolean("isADM");
 		}
