@@ -104,14 +104,16 @@ private Connection conexao;
 		List<DbContext> livros = new ArrayList<DbContext>();
 		while (resultSet.next())
 		{
-			id = resultSet.getInt("id");
-			nome = resultSet.getString("nome");
-			editora = resultSet.getString("editora");
-			edicao = resultSet.getInt("edicao");
-			preco = resultSet.getDouble("preco");
-			genero = resultSet.getString("tipo");
-			autor = resultSet.getString("autor");
-			livros.add(this);
+			Livro book = new Livro();
+			
+			book.setId(resultSet.getInt("id")); 
+			book.setNome(resultSet.getString("nome"));
+			book.setEditora(resultSet.getString("editora")); 
+			book.setEdicao(resultSet.getInt("edicao"));
+			book.setPreço(resultSet.getDouble("preco"));
+			book.setGenero(resultSet.getString("tipo")); 
+			book.setAutor(resultSet.getString("autor"));
+			livros.add(book);
 		}
 		
 		if (livros.size() > 0)
