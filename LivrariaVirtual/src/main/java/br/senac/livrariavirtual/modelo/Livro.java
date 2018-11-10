@@ -26,10 +26,10 @@ private Connection conexao;
 		statement = conexao.createStatement();
 	}
 	
-	public double getPreço() {
+	public double getPreco() {
 		return preco;
 	}
-	public void setPreço(double preco) {
+	public void setPreco(double preco) {
 		this.preco = preco;
 	}
 	public String getNome() {
@@ -110,7 +110,7 @@ private Connection conexao;
 			book.setNome(resultSet.getString("nome"));
 			book.setEditora(resultSet.getString("editora")); 
 			book.setEdicao(resultSet.getInt("edicao"));
-			book.setPreço(resultSet.getDouble("preco"));
+			book.setPreco(resultSet.getDouble("preco"));
 			book.setGenero(resultSet.getString("tipo")); 
 			book.setAutor(resultSet.getString("autor"));
 			livros.add(book);
