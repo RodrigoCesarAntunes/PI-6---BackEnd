@@ -89,6 +89,48 @@ public class LivroServico {
 		}	
 	}
 	
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Boolean putLivro(Livro livro)
+	{
+		try
+		{
+			livro.Alterar();
+			return true;
+		}
+		catch(SQLException ex)
+		{
+			System.out.println(ex.getMessage());
+			return false;
+		}
+		catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+			return false;
+		}	
+	}
+	
+	@PUT
+	@Path("/deletar")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Boolean deletarLivro(Livro livro)
+	{
+		try
+		{
+			livro.Deletar();
+			return true;
+		}
+		catch(SQLException ex)
+		{
+			System.out.println(ex.getMessage());
+			return false;
+		}
+		catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+			return false;
+		}	
+	}
 	
 	
 }

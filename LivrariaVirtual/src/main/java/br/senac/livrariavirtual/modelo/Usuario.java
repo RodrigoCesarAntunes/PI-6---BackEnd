@@ -132,7 +132,7 @@ public class Usuario extends DbContext {
 	public void Deletar() throws SQLException{
 		// TODO Auto-generated method stub
 		iniciarConexao();
-		String query = String.format("update usuario set isExcluido = %d, where email = '%s', ", 1, email);
+		String query = String.format("update usuario set isExcluido = %d where email = '%s'; ", 1, email);
 		System.out.println(query);
 		statement.executeUpdate(query);
 	}

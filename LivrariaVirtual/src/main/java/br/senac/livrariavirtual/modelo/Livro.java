@@ -83,8 +83,8 @@ private Connection conexao;
 		// TODO Auto-generated method stub
 		iniciarConexao();
 		String query = String.format("update livro set nome = '%s', editora = '%s', "
-				+ "edicao = '%s', preco = '%s', genero = '%s', autor = '%s' "
-				+ "where id = '%s';", nome, editora, edicao, preco, genero, autor, id);
+				+ "edicao = %s, preco = %s, tipo = '%s', autor = '%s' "
+				+ "where id = %s;", nome, editora, edicao, preco, genero, autor, id);
 		
 		System.out.println(query);
 		statement.executeUpdate(query);
@@ -145,7 +145,7 @@ private Connection conexao;
 	public void Deletar() throws SQLException {
 		// TODO Auto-generated method stub
 				iniciarConexao();
-				String query = String.format("update livro set isExcluido = %d, where id = '%d', ", 1, id);
+				String query = String.format("update livro set isExcluido = %d where id = %d; ", 1, id);
 				System.out.println(query);
 				statement.executeUpdate(query);
 	}
