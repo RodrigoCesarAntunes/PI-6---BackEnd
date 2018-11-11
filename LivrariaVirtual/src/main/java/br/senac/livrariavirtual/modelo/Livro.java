@@ -115,6 +115,9 @@ private Connection conexao;
 	@Override
 	public List<DbContext> SelecionarTudo() throws SQLException {
 		iniciarConexao();
+		if(nome == null)
+			nome = "";
+		
 		String query = String.format("SELECT * FROM livro WHERE nome like '%%%s%%' AND isExcluido < 1;", nome);
 		System.out.print(query);
 		resultSet = statement.executeQuery(query);
