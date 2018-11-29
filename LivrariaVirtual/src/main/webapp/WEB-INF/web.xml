@@ -19,6 +19,14 @@
 			<param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
 			<param-value>br.senac.livrariavirtual.servicos.filter.RESTCorsDemoRequestFilter</param-value>
 		</init-param>
+		<init-param>
+        <param-name>
+            com.sun.jersey.spi.container.ContainerResponseFilters
+        </param-name>
+        <param-value>
+            br.senac.livrariavirtual.servicos.filter
+        </param-value>
+    </init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>	

@@ -114,6 +114,7 @@ public class Usuario extends DbContext {
 		String _senha = "";
 		while (resultSet.next())
 		{
+			id = resultSet.getInt("id");
 			_senha = resultSet.getString("senha");
 			nome = resultSet.getString("nome");
 			numeroDocumento = resultSet.getString("documento");
