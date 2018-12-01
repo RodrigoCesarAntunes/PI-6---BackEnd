@@ -26,7 +26,9 @@ public class UploadServico {
 	public Response uploadPdfFile(  @FormDataParam("file") InputStream fileInputStream,
 	                                @FormDataParam("file") FormDataContentDisposition fileMetaData) throws Exception
 	{
-	    String UPLOAD_PATH = "/home/aluno/Dev/upload/arquivos/";
+		//home/aluno/Dev/upload/arquivos/
+		//System.out.print(System.getProperty("user.dir"));
+	    String UPLOAD_PATH = "/home/aluno/Área de Trabalho/Dev/Repositorio/PI-6---BackEnd/LivrariaVirtual/arquivos/";
 	    try
 	    {
 	        int read = 0;
