@@ -1,3 +1,12 @@
+Post Compra: http://localhost:8080/LivrariaVirtual/servicos/Compra
+{
+	"livroID":1,
+	"usuarioEmail": "adm2@gmail.com"
+}
+
+GEt compra: http://localhost:8080/LivrariaVirtual/servicos/Compra
+obs: Gera o arquivo
+
 
 POST: http://localhost:8080/LivrariaVirtual/servicos/Usuario
 

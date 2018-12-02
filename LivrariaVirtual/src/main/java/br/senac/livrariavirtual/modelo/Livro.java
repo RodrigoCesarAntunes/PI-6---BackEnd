@@ -74,8 +74,8 @@ public class Livro extends DbContext {
 	@Override
 	public void Inserir() throws SQLException {
 		iniciarConexao();
-		String query = String.format("INSERT INTO livro (nome, editora, edicao, preco, tipo, autor) "
-				+ "VALUES ('%s', '%s', '%s', '%s', '%s', '%s')" ,nome ,editora, edicao, preco, genero, autor);
+		String query = String.format("INSERT INTO livro (nome, editora, edicao, preco, tipo, autor, caminho) "
+				+ "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" ,nome ,editora, edicao, preco, genero, autor, caminho);
 		System.out.println(query);
 		statement.executeUpdate(query);
 	}
@@ -85,13 +85,33 @@ public class Livro extends DbContext {
 		// TODO Auto-generated method stub
 		iniciarConexao();
 		String query = String.format("update livro set nome = '%s', editora = '%s', "
-				+ "edicao = %s, preco = %s, tipo = '%s', autor = '%s' "
+				+ "edicao = %s, preco = %s, tipo = '%s', autor = '%s'"
 				+ "where id = %s;", nome, editora, edicao, preco, genero, autor, id);
 		
 		System.out.println(query);
 		statement.executeUpdate(query);
 	}
 
+	public Livro SelecionarUltimo() throws SQLException
+	{
+		iniciarConexao();
+		String query = String.format("select  * from livro order by id desc limit 1;");
+		System.out.print(query);
+		resultSet = statement.executeQuery(query);
+		
+		while (resultSet.next())
+		{	
+			id = resultSet.getInt("id"); 
+			nome = resultSet.getString("nome");
+			editora = resultSet.getString("editora"); 
+			edicao = resultSet.getInt("edicao");
+			preco = resultSet.getDouble("preco");
+			genero = resultSet.getString("tipo"); 
+			autor = resultSet.getString("autor");
+		}
+		return this;
+	}
+	
 	@Override
 	public Livro Selecionar() throws SQLException {
 		iniciarConexao();
@@ -109,9 +129,7 @@ public class Livro extends DbContext {
 			genero = resultSet.getString("tipo"); 
 			autor = resultSet.getString("autor");
 		}
-		
 		return this;
-		
 	}
 
 	@Override

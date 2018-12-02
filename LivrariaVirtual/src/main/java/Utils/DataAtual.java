@@ -7,12 +7,21 @@ import java.util.Date;
 
 public class DataAtual {
 
-	public static String Obter() {
+	public static String Obter(boolean isBeauty) {
 
 	    Date date = new Date();
-
-	    String strDateFormat = "yyyy:MM:dd hh:mm:ss";
-
+	    
+	    String strDateFormat = "";
+	    
+	    if(isBeauty)
+	    {
+	    	strDateFormat = "yyyy:MM:dd hh:mm:ss";
+	    }
+	    else
+	    {
+	    	strDateFormat = "ddMMyyyy";
+	    }
+	    
 	    DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
 
 	    String formattedDate= dateFormat.format(date);

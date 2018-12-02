@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,11 +20,14 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
 
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
+import Utils.Constantes;
 import br.senac.livrariavirtual.modelo.Livro;
+import br.senac.livrariavirtual.modelo.UsuarioLivros;
 
 @Path("/Livro")
 public class LivroServico {
@@ -145,15 +150,16 @@ public class LivroServico {
 	public Response uploadPdfFile(  @FormDataParam("file") InputStream fileInputStream,
 	                                @FormDataParam("file") FormDataContentDisposition fileMetaData) throws Exception
 	{
-		//home/aluno/Dev/upload/arquivos/
-		//System.out.print(System.getProperty("user.dir"));
-	    String UPLOAD_PATH = "/home/aluno/Área de Trabalho/Dev/Repositorio/PI-6---BackEnd/LivrariaVirtual/arquivos/";
+		Livro livro = new Livro();
+		livro.SelecionarUltimo();
+		
+	    String UPLOAD_PATH = Constantes.Livros_Caminho;
 	    try
 	    {
 	        int read = 0;
 	        byte[] bytes = new byte[1024];
-	 
-	        OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + fileMetaData.getFileName()));
+	        //fileMetaData.getFileName()
+	        OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + livro.getNome() + livro.getId() + ".pdf"));
 	        while ((read = fileInputStream.read(bytes)) != -1)
 	        {
 	            out.write(bytes, 0, read);
@@ -165,6 +171,60 @@ public class LivroServico {
 	        throw new WebApplicationException("Error while uploading file. Please try again !!");
 	    }
 	    return Response.ok("PDF adicionado com sucesso !!").build();
+	}
+	
+	@GET
+	@Path("/DownloadLivro")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getLivro()
+	{
+		
+		try
+		{
+			Livro livro = new Livro();
+			livro.SelecionarUltimo();
+			
+			UsuarioLivros usuarioLivros = new UsuarioLivros();  
+			usuarioLivros.Selecionar();	
+			
+			StreamingOutput fileStream =  new StreamingOutput()
+	        {
+	            @Override
+	            public void write(java.io.OutputStream output) throws IOException, WebApplicationException
+	            {
+	                try
+	                {
+	                	String caminho = Constantes.Livros_Caminho + livro.getNome() + livro.getId() + ".pdf";
+	                	System.out.println(caminho);
+	                    java.nio.file.Path path = Paths.get(caminho);
+	                    byte[] data = Files.readAllBytes(path);
+	                    output.write(data);
+	                    output.flush();
+	                }
+	                catch (Exception e)
+	                {
+	                    throw new WebApplicationException("File Not Found !!");
+	                }
+	            }
+	        };
+	        
+	        return Response
+	                .ok(fileStream, MediaType.APPLICATION_OCTET_STREAM)
+	                .header("content-disposition", "attachment; filename = Livro.pdf")
+	                .build();
+			
+			
+		}
+		catch(SQLException ex)
+		{
+			System.out.println(ex.getMessage());
+			return null;
+		}
+		catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+			return null;
+		}	
 	}
 	
 	

@@ -1,5 +1,8 @@
 package br.senac.livrariavirtual.servicos;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 
 
@@ -8,8 +11,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
 
+import Utils.Constantes;
 import Utils.DataAtual;
 import br.senac.livrariavirtual.modelo.UsuarioLivros;;
 
@@ -22,7 +29,7 @@ public class UsuarioLivrosServico {
 	{
 		try
 		{
-			usuarioLivros.setDataHora(DataAtual.Obter());
+			usuarioLivros.setDataHora(DataAtual.Obter(true));
 			usuarioLivros.Inserir();	
 			return true;
 		}
@@ -40,24 +47,51 @@ public class UsuarioLivrosServico {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getRelatorio()
+	public Response getRelatorio()
 	{
 		try
 		{
 			UsuarioLivros usuarioLivros = new UsuarioLivros();  
 			usuarioLivros.Selecionar();	
-			return "Arquivo gerado";
+			
+			StreamingOutput fileStream =  new StreamingOutput()
+	        {
+	            @Override
+	            public void write(java.io.OutputStream output) throws IOException, WebApplicationException
+	            {
+	                try
+	                {
+	                    java.nio.file.Path path = Paths.get(Constantes.Relatorio_Caminho);
+	                    byte[] data = Files.readAllBytes(path);
+	                    output.write(data);
+	                    output.flush();
+	                }
+	                catch (Exception e)
+	                {
+	                    throw new WebApplicationException("File Not Found !!");
+	                }
+	            }
+	        };
+	        
+	        return Response
+	                .ok(fileStream, MediaType.APPLICATION_OCTET_STREAM)
+	                .header("content-disposition", "attachment; filename = Relatório.csv")
+	                .build();
+			
+			
 		}
 		catch(SQLException ex)
 		{
 			System.out.println(ex.getMessage());
-			return "ex.getMessage()";
+			return null;
 		}
 		catch(Exception ex)
 		{
 			System.out.println(ex.getMessage());
-			return ex.getMessage();
+			return null;
 		}	
 	}
+	
+	 
 	
 }

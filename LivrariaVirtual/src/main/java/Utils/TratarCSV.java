@@ -15,7 +15,7 @@ public class TratarCSV {
 	
 	public boolean GerarCSV(ResultSet rs)
 	{
-		String Arquivo = "/home/aluno/Dev/download/relatorios/relatorio.csv";
+		String Arquivo = Constantes.Relatorio_Caminho;
 		try
 		{
 			LimparArquivo(Arquivo);
