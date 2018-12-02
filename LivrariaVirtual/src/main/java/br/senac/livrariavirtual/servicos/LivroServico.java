@@ -23,7 +23,6 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import br.senac.livrariavirtual.modelo.Livro;
-import br.senac.livrariavirtual.modelo.Usuario;
 
 @Path("/Livro")
 public class LivroServico {

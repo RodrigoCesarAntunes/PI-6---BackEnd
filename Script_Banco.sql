@@ -35,6 +35,7 @@ create table usuario_livros
 	id int primary key auto_increment,
     livro_id int,
     usuario_email varchar(255),
+	data_hora datetime,
     
     foreign key (livro_id) references livro(id),
     foreign key (usuario_email) references usuario(email)
