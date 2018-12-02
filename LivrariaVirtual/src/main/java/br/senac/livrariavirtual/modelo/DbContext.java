@@ -15,6 +15,7 @@ public abstract class DbContext {
 	public static String status = "Não conectou...";
 	protected Statement statement;
 	protected ResultSet resultSet;
+	protected Connection conexao;
 	
 	public DbContext() {
 		
@@ -109,6 +110,12 @@ public abstract class DbContext {
 
 		return DbContext.getConexaoMySQL();
 
+	}
+	
+	protected void iniciarConexao()throws SQLException
+	{
+		conexao = getConexaoMySQL();
+		statement = conexao.createStatement();
 	}
 	
 	

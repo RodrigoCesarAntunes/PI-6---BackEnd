@@ -14,17 +14,11 @@ public class Usuario extends DbContext {
 	private String dataNascimento;
 	private Boolean isADM;
 	
-	private Connection conexao;
+	//private Connection conexao;
 	
 	public Usuario() throws SQLException
 	{
 
-	}
-	
-	private void iniciarConexao()throws SQLException
-	{
-		conexao = getConexaoMySQL();
-		statement = conexao.createStatement();
 	}
 	
 	public String getNome() {

@@ -27,8 +27,6 @@ import br.senac.livrariavirtual.modelo.Usuario;
 
 @Path("/Livro")
 public class LivroServico {
-	
-
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Livro> getLivro(@QueryParam("nome")String nome)

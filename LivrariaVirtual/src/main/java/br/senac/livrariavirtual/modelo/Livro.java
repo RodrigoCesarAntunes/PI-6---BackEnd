@@ -14,17 +14,14 @@ public class Livro extends DbContext {
 	private String genero;
 	private String autor;
 	private int id;
+	private String caminho;
 	
-private Connection conexao;
+	//private Connection conexao;
 	
 	public Livro() throws SQLException
 	{
 	}
-	private void iniciarConexao()throws SQLException
-	{
-		conexao = getConexaoMySQL();
-		statement = conexao.createStatement();
-	}
+	
 	
 	public double getPreco() {
 		return preco;
@@ -68,7 +65,12 @@ private Connection conexao;
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+	public String getCaminho() {
+		return caminho;
+	}
+	public void setCaminho(String caminho) {
+		this.caminho = caminho;
+	}
 	@Override
 	public void Inserir() throws SQLException {
 		iniciarConexao();
@@ -152,4 +154,5 @@ private Connection conexao;
 				System.out.println(query);
 				statement.executeUpdate(query);
 	}
+	
 }

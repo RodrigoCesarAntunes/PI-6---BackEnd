@@ -26,6 +26,7 @@ create table livro
 	preco decimal(6,2),
 	editora varchar(255),
 	edicao int,
+	caminho varchar(255),
 	isExcluido int(1) default 0
 );
 
