@@ -1,3 +1,9 @@
+download de livro: http://localhost:8080/LivrariaVirtual/servicos/Livro/DownloadLivro
+obs: so executar esse link em get
+
+
+
+
 Post Compra: http://localhost:8080/LivrariaVirtual/servicos/Compra
 {
 	"livroID":1,
@@ -5,7 +11,7 @@ Post Compra: http://localhost:8080/LivrariaVirtual/servicos/Compra
 }
 
 GEt compra: http://localhost:8080/LivrariaVirtual/servicos/Compra
-obs: Gera o arquivo
+obs: Faz o download do relatório em .csv
 
 
 POST: http://localhost:8080/LivrariaVirtual/servicos/Usuario
