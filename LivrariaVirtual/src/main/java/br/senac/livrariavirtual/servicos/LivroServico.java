@@ -178,7 +178,6 @@ public class LivroServico {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getLivro(@QueryParam("id")int id, @QueryParam("titulo")String titulo)
 	{
-		
 		try
 		{
 			Livro livro = new Livro();
