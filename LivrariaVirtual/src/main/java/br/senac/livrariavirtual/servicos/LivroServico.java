@@ -176,13 +176,15 @@ public class LivroServico {
 	@GET
 	@Path("/DownloadLivro")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getLivro()
+	public Response getLivro(@QueryParam("id")int id, @QueryParam("titulo")String titulo)
 	{
 		
 		try
 		{
 			Livro livro = new Livro();
-			livro.SelecionarUltimo();
+			livro.setId(id);
+			livro.setNome(titulo);
+			//livro.SelecionarUltimo();
 			
 			UsuarioLivros usuarioLivros = new UsuarioLivros();  
 			usuarioLivros.Selecionar();	
