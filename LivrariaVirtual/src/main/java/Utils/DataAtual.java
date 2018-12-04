@@ -19,7 +19,7 @@ public class DataAtual {
 	    }
 	    else
 	    {
-	    	strDateFormat = "ddMMyyyy";
+	    	strDateFormat = "dd-MM-yyyy";
 	    }
 	    
 	    DateFormat dateFormat = new SimpleDateFormat(strDateFormat);

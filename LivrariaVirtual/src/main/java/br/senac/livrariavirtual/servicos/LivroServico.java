@@ -211,7 +211,7 @@ public class LivroServico {
 	        
 	        return Response
 	                .ok(fileStream, MediaType.APPLICATION_OCTET_STREAM)
-	                .header("content-disposition", "attachment; filename = Livro.pdf")
+	                .header("content-disposition", "attachment; filename = " + titulo + ".pdf")
 	                .build();
 			
 			

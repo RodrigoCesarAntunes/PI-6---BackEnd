@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import Utils.Constantes;
+
 public class Livro extends DbContext {
 	
 	private double preco;
@@ -74,8 +76,9 @@ public class Livro extends DbContext {
 	@Override
 	public void Inserir() throws SQLException {
 		iniciarConexao();
+		caminho = Constantes.Livros_Caminho + nome + id + ".pdf";
 		String query = String.format("INSERT INTO livro (nome, editora, edicao, preco, tipo, autor, caminho) "
-				+ "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" ,nome ,editora, edicao, preco, genero, autor, caminho);
+				+ "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" ,nome ,editora, edicao, preco, genero, autor, caminho );
 		System.out.println(query);
 		statement.executeUpdate(query);
 	}
