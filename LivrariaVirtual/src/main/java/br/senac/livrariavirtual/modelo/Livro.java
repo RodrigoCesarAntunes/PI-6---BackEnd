@@ -76,6 +76,7 @@ public class Livro extends DbContext {
 	@Override
 	public void Inserir() throws SQLException {
 		iniciarConexao();
+		//SelecionarUltimo();
 		caminho = Constantes.Livros_Caminho + nome + id + ".pdf";
 		String query = String.format("INSERT INTO livro (nome, editora, edicao, preco, tipo, autor, caminho) "
 				+ "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" ,nome ,editora, edicao, preco, genero, autor, caminho );
@@ -131,6 +132,7 @@ public class Livro extends DbContext {
 			preco = resultSet.getDouble("preco");
 			genero = resultSet.getString("tipo"); 
 			autor = resultSet.getString("autor");
+			caminho = resultSet.getString("caminho");
 		}
 		return this;
 	}

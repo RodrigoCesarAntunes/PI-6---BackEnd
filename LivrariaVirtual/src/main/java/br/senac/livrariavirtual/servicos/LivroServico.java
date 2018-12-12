@@ -86,7 +86,12 @@ public class LivroServico {
 	{
 		try
 		{
+			int id = new Livro().SelecionarUltimo().getId();
+			id = id+1;
+			
+			livro.setId(id);
 			livro.Inserir();	
+			
 			return true;
 		}
 		catch(SQLException ex)
@@ -158,8 +163,10 @@ public class LivroServico {
 	    {
 	        int read = 0;
 	        byte[] bytes = new byte[1024];
-	        //fileMetaData.getFileName()
-	        OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + livro.getNome() + livro.getId() + ".pdf"));
+	        //fileMetaData.getFileName();
+	        System.out.println(UPLOAD_PATH + livro.getNome() + Integer.toString(livro.getId()) + ".pdf");
+	        String caminho = UPLOAD_PATH + livro.getNome() + Integer.toString(livro.getId()) + ".pdf";
+	        OutputStream out = new FileOutputStream(new File(caminho));
 	        while ((read = fileInputStream.read(bytes)) != -1)
 	        {
 	            out.write(bytes, 0, read);
@@ -183,6 +190,7 @@ public class LivroServico {
 			Livro livro = new Livro();
 			livro.setId(id);
 			livro.setNome(titulo);
+			livro.Selecionar();
 			//livro.SelecionarUltimo();
 			
 			UsuarioLivros usuarioLivros = new UsuarioLivros();  
@@ -195,7 +203,7 @@ public class LivroServico {
 	            {
 	                try
 	                {
-	                	String caminho = Constantes.Livros_Caminho + livro.getNome() + livro.getId() + ".pdf";
+	                	String caminho = livro.getCaminho(); //Constantes.Livros_Caminho + livro.getNome() + livro.getId() + ".pdf";
 	                	System.out.println(caminho);
 	                    java.nio.file.Path path = Paths.get(caminho);
 	                    byte[] data = Files.readAllBytes(path);
