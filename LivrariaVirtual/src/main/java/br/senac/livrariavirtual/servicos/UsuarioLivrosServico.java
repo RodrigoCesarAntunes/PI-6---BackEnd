@@ -11,6 +11,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -47,12 +48,29 @@ public class UsuarioLivrosServico {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getRelatorio()
+	public Response getRelatorio(@QueryParam("mesInicio")int mesInicio, 
+			@QueryParam("mesFim")int mesFim, @QueryParam("tipo")String tipo)
 	{
+		
+		String dataInicio = "2018-" + mesInicio + "-01";
+		String dataFim = "2018-" + mesFim + "-28";
+		
 		try
 		{
-			UsuarioLivros usuarioLivros = new UsuarioLivros();  
-			usuarioLivros.Selecionar();	
+			UsuarioLivros usuarioLivros = new UsuarioLivros();
+			switch(tipo)
+			{
+				case "livros":
+					usuarioLivros.SelecionarLivros(dataInicio, dataFim);
+					break;
+				case "usuarios":
+					usuarioLivros.SelecionarUsuarios(dataInicio, dataFim);
+					break;
+				default:
+					usuarioLivros.SelecionarLivros(dataInicio, dataFim);
+					break;
+			}
+				
 			
 			StreamingOutput fileStream =  new StreamingOutput()
 	        {

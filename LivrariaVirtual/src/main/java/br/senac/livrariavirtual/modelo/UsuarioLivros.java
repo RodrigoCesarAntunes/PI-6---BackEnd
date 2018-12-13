@@ -64,12 +64,44 @@ public class UsuarioLivros extends DbContext {
 	public DbContext Selecionar() throws SQLException {
 		iniciarConexao();
 		StringBuilder query = new StringBuilder();
-		query.append("SELECT user_book.data_hora, usuario.id, usuario.nome, usuario.email, usuario.senha, usuario.data_nascimento, ");
-		query.append("livro.id as 'id_livro', livro.nome as 'livro', livro.autor, ");
-		query.append("livro.tipo  as 'genêro', livro.preco as 'preço', livro.editora, livro.edicao ");
-		query.append("FROM usuario ");
-		query.append("LEFT JOIN usuario_livros user_book on user_book.usuario_email like usuario.email ");
-		query.append("INNER JOIN livro on livro.id = user_book.livro_id;");
+		query.append("SELECT l.nome AS 'Livro', l.autor AS 'Autor', l.tipo AS 'Genêro', COUNT(ul.livro_id) AS 'Downloads' ");
+		query.append("FROM usuario_livros ul ");
+		query.append("INNER JOIN livro l ON ul.livro_id = l.id ");
+		query.append(String.format("WHERE ul.data_hora BETWEEN '%s' AND '%s' ", "2018-12-01", "2018-12-04"));
+		query.append("GROUP BY livro_id ");
+		query.append("ORDER BY COUNT(ul.livro_id) DESC;");
+		
+		TratarCSV csv = new TratarCSV();
+		csv.GerarCSV(statement.executeQuery(query.toString()));
+		
+		return null;
+	}
+	
+	public DbContext SelecionarLivros(String dataInicio, String dataFim) throws SQLException {
+		iniciarConexao();
+		StringBuilder query = new StringBuilder();
+		query.append("SELECT l.nome AS 'Livro', l.autor AS 'Autor', l.tipo AS 'Genêro', COUNT(ul.livro_id) AS 'Downloads' ");
+		query.append("FROM usuario_livros ul ");
+		query.append("INNER JOIN livro l ON ul.livro_id = l.id ");
+		query.append(String.format("WHERE ul.data_hora BETWEEN '%s' AND '%s' ", dataInicio, dataFim));
+		query.append("GROUP BY livro_id ");
+		query.append("ORDER BY COUNT(ul.livro_id) DESC;");
+		
+		TratarCSV csv = new TratarCSV();
+		csv.GerarCSV(statement.executeQuery(query.toString()));
+		
+		return null;
+	}
+	
+	public DbContext SelecionarUsuarios(String dataInicio, String dataFim) throws SQLException {
+		iniciarConexao();
+		StringBuilder query = new StringBuilder();
+		query.append("SELECT u.nome, u.email, u.documento ,count(u.id) AS 'Downloads' ");
+		query.append("FROM usuario_livros ul ");
+		query.append("INNER JOIN usuario u ON ul.usuario_email like u.email ");
+		query.append(String.format("WHERE ul.data_hora BETWEEN '%s' AND '%s' ", dataInicio, dataFim));
+		query.append("group by u.nome, u.email, u.documento ");
+		query.append("order by count(u.id) desc;");
 		
 		TratarCSV csv = new TratarCSV();
 		csv.GerarCSV(statement.executeQuery(query.toString()));
