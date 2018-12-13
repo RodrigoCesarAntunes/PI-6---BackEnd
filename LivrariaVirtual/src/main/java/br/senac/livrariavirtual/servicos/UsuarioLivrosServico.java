@@ -93,7 +93,7 @@ public class UsuarioLivrosServico {
 	        
 	        return Response
 	                .ok(fileStream, MediaType.APPLICATION_OCTET_STREAM)
-	                .header("content-disposition", "attachment; filename = Relatório_" + DataAtual.Obter(false)+ ".csv")
+	                .header("content-disposition", "attachment; filename = Relatório_" + tipo + "_" + DataAtual.Obter(false)+ ".csv")
 	                .build();
 		}
 		catch(SQLException ex)
